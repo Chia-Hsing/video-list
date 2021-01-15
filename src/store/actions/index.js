@@ -1,0 +1,1 @@
+export { getPopularList } from './video'
