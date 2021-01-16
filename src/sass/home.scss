@@ -22,6 +22,15 @@
             }
         }
 
+        & .timeAndLike {
+            display: flex;
+            justify-content: space-between;
+
+            span:nth-of-type(2) {
+                cursor: pointer;
+            }
+        }
+
         & .videoDetail {
             width: 100%;
             // height: 30%;

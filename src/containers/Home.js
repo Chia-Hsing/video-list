@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import PopularList from '../components/PopularList'
 import * as actions from '../store/actions/index'
@@ -33,6 +32,10 @@ class Home extends Component {
         const page = e.target.innerText
 
         this.setState({ currentPage: +page })
+    }
+
+    addLikeHandler = e => {
+        const target = e.target
     }
 
     render() {
@@ -85,4 +88,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
