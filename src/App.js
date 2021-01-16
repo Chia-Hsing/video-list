@@ -8,17 +8,15 @@ import Like from './containers/Like'
 const App = () => {
     const routers = (
         <Switch>
-            <Route path="/" component={Home}></Route>
             <Route path="/like" component={Like}></Route>
+            <Route path="/" component={Home} exact></Route>
+            <Redirect to="/" />
         </Switch>
     )
 
     return (
         <div>
-            <Layout>
-                {routers}
-                <Redirect to="/" />
-            </Layout>
+            <Layout>{routers}</Layout>
         </div>
     )
 }

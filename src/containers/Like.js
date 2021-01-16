@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Like extends Component {
     render() {
-        return
+        return <section></section>
     }
 }
 

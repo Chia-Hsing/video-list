@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import PopularList from '../components/PopularList'
 import * as actions from '../store/actions/index'
@@ -7,44 +8,74 @@ import Pagination from '../components/Pagination'
 
 class Home extends Component {
     state = {
-        currentPage: 0,
+        currentPage: 1,
         loading: false,
     }
 
     componentDidMount() {
-        this.props.onGetPopularList(process.env.REACT_APP_GOOGLE_API_KEY, this.props.token)
+        this.props.onGetPopularList(process.env.REACT_APP_GOOGLE_API_KEY, this.props.nextPageToken)
     }
 
-    pevPageHandler = () => {
-        this.setState(prevState => ({ currentPage: +prevState - 1 }))
+    nextPageSwitchHandler = () => {
+        if (this.state.currentPage < this.props.totalPages) {
+            this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }))
+        }
     }
 
-    nextPageHandler = () => {
-        this.setState(prevState => ({ currentPage: +prevState + 1 }))
+    prevPageSwitchHandler = () => {
+        if (this.state.currentPage > 1) {
+            this.setState(prevState => ({ currentPage: prevState.currentPage - 1 }))
+        }
+    }
+
+    currentPageSwitchHandler = e => {
+        const page = e.target.innerText
+
+        this.setState({ currentPage: +page })
     }
 
     render() {
-        // allPagesContent = data
-        // const start = (page - 1) * itemsShown
-        // const end = start + itemsShown
-        // let pageContent = allPagesContent.slice(start, end)
-        // demonstratePageContent(pageContent)
+        const itemsShown = 12
+        const allPagesContent = this.props.listData
+        const page = this.state.currentPage
 
-        let popularList = this.props.listData.map(item => {
-            return <PopularList img={item.url} title={item.title} des={item.description} />
+        const start = (page - 1) * itemsShown
+        const end = start + itemsShown
+        let pageContent = allPagesContent.slice(start, end)
+
+        let popularList = pageContent.map(item => {
+            return (
+                <PopularList
+                    key={item.title}
+                    img={item.url}
+                    duration={item.duration}
+                    title={item.title}
+                    des={item.description}
+                />
+            )
         })
 
         return (
             <section>
                 {popularList}
-                <Pagination />
+                <Pagination
+                    totalPages={this.props.totalPages}
+                    currentPage={this.state.currentPage}
+                    nextPageSwitch={this.nextPageSwitchHandler}
+                    prevPageSwitch={this.prevPageSwitchHandler}
+                    currentPageSwitch={e => this.currentPageSwitchHandler(e)}
+                />
             </section>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { token: state.token, listData: state.listData }
+    return {
+        nextPageToken: state.nextPageToken,
+        totalPages: state.totalPages,
+        listData: state.listData,
+    }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -53,4 +84,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))

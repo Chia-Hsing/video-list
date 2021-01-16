@@ -6,7 +6,11 @@ const PopularList = props => {
             <figure>
                 <img src={props.img} alt="" />
             </figure>
-            <div></div>
+            <span>{props.duration}</span>
+            <div>
+                <h3>{props.title}</h3>
+                <small>{props.des}</small>
+            </div>
         </div>
     )
 }
