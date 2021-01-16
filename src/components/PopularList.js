@@ -2,14 +2,14 @@ import React from 'react'
 
 const PopularList = props => {
     return (
-        <div>
+        <div className="videoContainer">
             <figure>
                 <img src={props.img} alt="" />
             </figure>
             <span>{props.duration}</span>
-            <div>
-                <h3>{props.title}</h3>
-                <small>{props.des}</small>
+            <div className="videoDetail">
+                <h4>{props.title}</h4>
+                <span>{props.des}</span>
             </div>
         </div>
     )

@@ -9,6 +9,7 @@ export const initPopularList = () => dispatch => {
 export const getPopularList = (apiKey, token) => async dispatch => {
     try {
         const { data: list } = await apis.getPopularList(apiKey, token)
+        console.log(list)
 
         let listData = []
 
@@ -19,7 +20,7 @@ export const getPopularList = (apiKey, token) => async dispatch => {
                     description,
                     title,
                     thumbnails: {
-                        standard: { url },
+                        medium: { url },
                     },
                 },
             } = item
@@ -63,7 +64,7 @@ const getPopularListPage2 = (apiKey, token) => async dispatch => {
                     description,
                     title,
                     thumbnails: {
-                        standard: { url },
+                        medium: { url },
                     },
                 },
             } = item

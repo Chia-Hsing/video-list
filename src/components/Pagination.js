@@ -1,24 +1,26 @@
 import React from 'react'
 
+import '../sass/layout.scss'
+
 const Pagination = props => {
     let pagination = []
 
     for (let i = 1; i <= props.totalPages; i++) {
         pagination.push(
-            <li key={i} className="page-item" onClick={props.currentPageSwitch}>
+            <li key={i} className="pageItem" onClick={props.currentPageSwitch}>
                 {i}
             </li>
         )
     }
 
     return (
-        <section>
+        <section className="pagination">
             <ul>
-                <li className="page-item" onClick={props.prevPageSwitch}>
+                <li className="pageItem" onClick={props.prevPageSwitch}>
                     {'<'}
                 </li>
                 {pagination}
-                <li className="page-item" onClick={props.nextPageSwitch}>
+                <li className="pageItem" onClick={props.nextPageSwitch}>
                     {'>'}
                 </li>
             </ul>

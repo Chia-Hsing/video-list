@@ -1,0 +1,51 @@
+@import 'variables';
+
+.homeWrap {
+    max-width: 80%;
+    margin: 2em auto;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(3, 1fr);
+
+    .videoContainer {
+        max-width: 100%;
+        padding: 0.6rem;
+        height: 300px;
+
+        & figure {
+            max-width: 100%;
+            margin: 0;
+
+            img {
+                object-fit: contain;
+                max-width: 100%;
+            }
+        }
+
+        & .videoDetail {
+            width: 100%;
+            // height: 30%;
+
+            h4 {
+                margin: 0 0 1rem;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
+
+            span {
+                color: color(light-grey);
+                display: block;
+                overflow: hidden;
+                height: 40%;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+        }
+    }
+}

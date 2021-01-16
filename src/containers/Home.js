@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import PopularList from '../components/PopularList'
 import * as actions from '../store/actions/index'
 import Pagination from '../components/Pagination'
+import '../sass/home.scss'
 
 class Home extends Component {
     state = {
@@ -56,8 +57,8 @@ class Home extends Component {
         })
 
         return (
-            <section>
-                {popularList}
+            <>
+                <section className="homeWrap">{popularList}</section>
                 <Pagination
                     totalPages={this.props.totalPages}
                     currentPage={this.state.currentPage}
@@ -65,7 +66,7 @@ class Home extends Component {
                     prevPageSwitch={this.prevPageSwitchHandler}
                     currentPageSwitch={e => this.currentPageSwitchHandler(e)}
                 />
-            </section>
+            </>
         )
     }
 }
