@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import LikeList from './LikeList'
+import LikeList from '../components/LikeList'
 import Pagination from '../components/Pagination'
+import '../sass/main.scss'
 
 class Like extends Component {
     state = {

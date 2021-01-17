@@ -5,49 +5,11 @@ $color: (
     light-grey: #6e6e6e,
     lighter-grey: rgb(225, 228, 228),
     transparent-grey: #2a2c305d,
+    transparent-white: #dce1e95b,
     yellow: #ccc012,
     red: rgba(211, 25, 71, 0.952),
 );
 
 @function color($color-name) {
     @return map-get($color, $color-name);
-}
-
-$font-size: (
-    2xl: 2.5em,
-    xl: 2em,
-    l: 1.5em,
-    m: 1.2em,
-    s: 1em,
-    xs: 0.8em,
-);
-
-@function size($size) {
-    @return map-get($font-size, $size);
-}
-
-$font-weight: (
-    light: 300,
-    normal: 500,
-    bold: 700,
-);
-
-@function weight($weight) {
-    @return map-get($font-weight, $weight);
-}
-
-$z-index: (
-    a: -2,
-    b: -1,
-    c: 1,
-    d: 2,
-    e: 3,
-    f: 4,
-    g: 5,
-    h: 6,
-    i: 7,
-);
-
-@function z($index) {
-    @return map-get($z-index, $index);
 }

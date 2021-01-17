@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PopularList from './PopularList'
 import * as actions from '../store/actions/index'
 import Pagination from '../components/Pagination'
-import '../sass/home.scss'
+import '../sass/main.scss'
 
 class Home extends Component {
     state = {

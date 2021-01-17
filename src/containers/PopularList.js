@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { icon } from '../utils/icon'
 
@@ -31,17 +32,21 @@ class PopularList extends Component {
     render() {
         return (
             <div className="videoContainer">
-                <figure>
-                    <img src={this.props.img} alt="" />
-                </figure>
+                <Link to={`/video/${this.props.id}`}>
+                    <figure>
+                        <img src={this.props.img} alt="" />
+                    </figure>
+                </Link>
                 <div className="timeAndLike">
                     <span>{this.props.duration}</span>
                     <span onClick={this.likeChange}>{this.state.like ? icon.solidHeart() : icon.emptyHeart()}</span>
                 </div>
-                <div className="videoDetail">
-                    <h4>{this.props.title}</h4>
-                    <span>{this.props.des}</span>
-                </div>
+                <Link to={`/video/${this.props.id}`}>
+                    <div className="videoDetail">
+                        <h4>{this.props.title}</h4>
+                        <span>{this.props.des}</span>
+                    </div>
+                </Link>
             </div>
         )
     }
