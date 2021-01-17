@@ -6,6 +6,7 @@ const initialState = {
     totalPages: 0,
     nextPageToken: null,
     listData: [],
+    recommendationData: [],
     error: null,
 }
 
@@ -14,7 +15,6 @@ const getPopularListSuccess = (state, action) => {
     const totalPages = Math.ceil(totalResults / 12)
 
     return updateObj(state, {
-        loading: false,
         totalResults: totalResults,
         totalPages: totalPages,
         nextPageToken: action.nextPageToken,
@@ -26,7 +26,6 @@ const getPopularListSuccess = (state, action) => {
 const getPopularListPage2Success = (state, action) => {
     const updatedListData = state.listData.concat(action.listData2)
     return updateObj(state, {
-        loading: false,
         listData: updatedListData,
         error: null,
     })
@@ -38,14 +37,23 @@ const getPopularListFailed = (state, action) => {
     })
 }
 
+const getRecommendationSuccess = (state, action) => {
+    return updateObj(state, {
+        recommendationData: action.recommendationData,
+        error: null,
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_POPULAR_LIST_SUCCESS:
             return getPopularListSuccess(state, action)
         case actionTypes.GET_POPULAR_LIST_PAGE_TWO_SUCCESS:
             return getPopularListPage2Success(state, action)
-        case actionTypes.GET_POPULAR_LIST_FAILED:
+        case actionTypes.GET_LIST_FAILED:
             return getPopularListFailed(state, action)
+        case actionTypes.GET_RECOMMENDATION_LIST_SUCCESS:
+            return getRecommendationSuccess(state, action)
         default:
             return state
     }

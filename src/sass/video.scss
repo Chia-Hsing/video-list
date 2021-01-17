@@ -1,7 +1,46 @@
+@import 'variables';
+
 .videoPlayWrap {
     margin: 0 auto;
+    position: relative;
+
+    .goBack {
+        position: absolute;
+        left: 2em;
+        top: 250px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+            color: color(yellow);
+        }
+
+        svg {
+            font-size: 2.5em;
+        }
+    }
 
     .videoContainer {
         display: flex;
+        flex-direction: column;
+        margin: 2em 5em;
+
+        .videoDetail {
+            padding: 0.6rem;
+
+            .duration {
+                font-size: 1.2rem;
+            }
+
+            h4 {
+                font-size: 1.6rem;
+            }
+
+            .description {
+                word-break: normal;
+                white-space: pre-line;
+                line-height: 2rem;
+            }
+        }
     }
 }

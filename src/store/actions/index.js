@@ -1,1 +1,1 @@
-export { getPopularList, getPopularListPage2 } from './video'
+export { getPopularList, getPopularListPage2, getRecommendation } from './video'

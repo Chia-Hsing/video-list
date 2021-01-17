@@ -26,3 +26,16 @@ export const getPopularListPage2 = (apiKey, token) => {
         },
     })
 }
+
+export const getRecommendation = (apiKey, id) => {
+    return apiHelper.get('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+            part: 'snippet',
+            key: apiKey,
+            maxResults: 8,
+            relatedToVideoId: id,
+            regionCode: 'us',
+            type: 'video',
+        },
+    })
+}

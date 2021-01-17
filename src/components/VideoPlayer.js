@@ -29,16 +29,16 @@ const VideoPlayer = props => {
     }, [])
 
     return (
-        <>
-            <div data-vjs-player className="videoContainer">
+        <div className="videoContainer">
+            <div data-vjs-player className="videoPlayer">
                 <video className="video-js" ref={playerRef} />
             </div>
             <div className="videoDetail">
-                <span>{props.duration}</span>
+                <span className="duration">{props.duration}</span>
                 <h4>{props.title}</h4>
-                <span>{props.des}</span>
+                <span className="description">{props.des}</span>
             </div>
-        </>
+        </div>
     )
 }
 

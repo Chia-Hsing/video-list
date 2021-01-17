@@ -39,7 +39,7 @@ export const getPopularList = apiKey => async dispatch => {
         })
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_POPULAR_LIST_FAILED,
+            type: actionTypes.GET_LIST_FAILED,
             error,
         })
     }
@@ -75,7 +75,41 @@ export const getPopularListPage2 = (apiKey, token) => async dispatch => {
         })
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_POPULAR_LIST_FAILED,
+            type: actionTypes.GET_LIST_FAILED,
+            error,
+        })
+    }
+}
+
+export const getRecommendation = (apiKey, id) => async dispatch => {
+    try {
+        const { data: list } = await apis.getRecommendation(apiKey, id)
+
+        console.log(list)
+
+        let recommendationData = []
+
+        list.items.forEach(item => {
+            const {
+                snippet: {
+                    title,
+                    thumbnails: {
+                        medium: { url },
+                    },
+                },
+                id,
+            } = item
+
+            recommendationData.push({ title, url, id })
+        })
+
+        dispatch({
+            type: actionTypes.GET_RECOMMENDATION_LIST_SUCCESS,
+            recommendationData,
+        })
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_LIST_FAILED,
             error,
         })
     }
