@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import PopularList from '../components/PopularList'
+import PopularList from './PopularList'
 import * as actions from '../store/actions/index'
 import Pagination from '../components/Pagination'
 import '../sass/home.scss'
@@ -9,11 +9,11 @@ import '../sass/home.scss'
 class Home extends Component {
     state = {
         currentPage: 1,
-        loading: false,
     }
 
-    componentDidMount() {
-        this.props.onGetPopularList(process.env.REACT_APP_GOOGLE_API_KEY, this.props.nextPageToken)
+    async componentDidMount() {
+        await this.props.onGetPopularList(process.env.REACT_APP_GOOGLE_API_KEY)
+        await this.props.getPopularListPage2(process.env.REACT_APP_GOOGLE_API_KEY, this.props.nextPageToken)
     }
 
     nextPageSwitchHandler = () => {
@@ -34,8 +34,30 @@ class Home extends Component {
         this.setState({ currentPage: +page })
     }
 
-    addLikeHandler = e => {
-        const target = e.target
+    addLikeHandler = id => {
+        const favoriteVideo = JSON.parse(localStorage.getItem('favoriteVideo')) || []
+
+        const video = this.props.listData.find(item => {
+            return item.id === id
+        })
+
+        favoriteVideo.push(video)
+
+        localStorage.setItem('favoriteVideo', JSON.stringify(favoriteVideo))
+    }
+
+    removeLikeHandler = id => {
+        const favoriteVideo = JSON.parse(localStorage.getItem('favoriteVideo')) || []
+
+        if (favoriteVideo.length === 0) {
+            return
+        }
+
+        const videoArray = favoriteVideo.filter(item => {
+            return item.id !== id
+        })
+
+        localStorage.setItem('favoriteVideo', JSON.stringify(videoArray))
     }
 
     render() {
@@ -55,13 +77,16 @@ class Home extends Component {
                     duration={item.duration}
                     title={item.title}
                     des={item.description}
+                    id={item.id}
+                    addLike={id => this.addLikeHandler(id)}
+                    removeLike={id => this.removeLikeHandler(id)}
                 />
             )
         })
 
         return (
             <>
-                <section className="homeWrap">{popularList}</section>
+                <section className="wrap">{popularList}</section>
                 <Pagination
                     totalPages={this.props.totalPages}
                     currentPage={this.state.currentPage}
@@ -84,7 +109,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetPopularList: (apiKey, token) => dispatch(actions.getPopularList(apiKey, token)),
+        onGetPopularList: apiKey => dispatch(actions.getPopularList(apiKey)),
+        getPopularListPage2: (apiKey, token) => {
+            dispatch(actions.getPopularListPage2(apiKey, token))
+        },
     }
 }
 

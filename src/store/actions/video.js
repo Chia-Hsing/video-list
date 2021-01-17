@@ -2,14 +2,9 @@ import * as actionTypes from './actionTypes'
 import * as apis from '../../apis/video'
 import { timeConverter } from '../../utils/utilities'
 
-export const initPopularList = () => dispatch => {
-    dispatch({ type: actionTypes.INIT_POPULAR_LIST })
-}
-
-export const getPopularList = (apiKey, token) => async dispatch => {
+export const getPopularList = apiKey => async dispatch => {
     try {
-        const { data: list } = await apis.getPopularList(apiKey, token)
-        console.log(list)
+        const { data: list } = await apis.getPopularList(apiKey)
 
         let listData = []
 
@@ -23,11 +18,12 @@ export const getPopularList = (apiKey, token) => async dispatch => {
                         medium: { url },
                     },
                 },
+                id,
             } = item
 
             const time = timeConverter(duration)
 
-            listData.push({ duration: time, description, title, url })
+            listData.push({ duration: time, description, title, url, id })
         })
 
         const {
@@ -41,8 +37,6 @@ export const getPopularList = (apiKey, token) => async dispatch => {
             totalResults,
             nextPageToken,
         })
-
-        dispatch(getPopularListPage2(apiKey, token))
     } catch (error) {
         dispatch({
             type: actionTypes.GET_POPULAR_LIST_FAILED,
@@ -51,9 +45,9 @@ export const getPopularList = (apiKey, token) => async dispatch => {
     }
 }
 
-const getPopularListPage2 = (apiKey, token) => async dispatch => {
+export const getPopularListPage2 = (apiKey, token) => async dispatch => {
     try {
-        const { data: list } = await apis.getPopularList(apiKey, token)
+        const { data: list } = await apis.getPopularListPage2(apiKey, token)
 
         let listData2 = []
 
@@ -67,11 +61,12 @@ const getPopularListPage2 = (apiKey, token) => async dispatch => {
                         medium: { url },
                     },
                 },
+                id,
             } = item
 
             const time = timeConverter(duration)
 
-            listData2.push({ duration: time, description, title, url })
+            listData2.push({ duration: time, description, title, url, id })
         })
 
         dispatch({

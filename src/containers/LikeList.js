@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { icon } from '../utils/icon'
 
-const PopularList = props => {
-    const [likeState, setLikeState] = useState(false)
-
-    const iconChange = (event, props) => {
-        setLikeState(!likeState)
+const LikeList = props => {
+    const removeLikeHandler = () => {
+        props.removeLike(props.id)
     }
-
     return (
         <div className="videoContainer">
             <figure>
@@ -16,7 +13,7 @@ const PopularList = props => {
             </figure>
             <div className="timeAndLike">
                 <span>{props.duration}</span>
-                <span onClick={iconChange}>{likeState ? icon.solidHeart() : icon.emptyHeart()}</span>
+                <span onClick={removeLikeHandler}>{icon.solidHeart()}</span>
             </div>
             <div className="videoDetail">
                 <h4>{props.title}</h4>
@@ -26,4 +23,4 @@ const PopularList = props => {
     )
 }
 
-export default PopularList
+export default LikeList

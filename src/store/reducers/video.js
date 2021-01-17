@@ -34,7 +34,7 @@ const getPopularListPage2Success = (state, action) => {
 
 const getPopularListFailed = (state, action) => {
     return updateObj(state, {
-        error: action.error,
+        error: action.error.message,
     })
 }
 
