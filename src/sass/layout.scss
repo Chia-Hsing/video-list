@@ -1,18 +1,23 @@
 @import 'variables';
+@import 'mixin';
 
-.nav {
+.navbar {
     display: flex;
     align-items: center;
     height: auto;
     padding: 1em 1.5em;
     background-color: color(lighter-grey);
 
+    .menu {
+        display: none;
+    }
+
     h2 {
-        margin: 0 1em;
+        margin: 0 1.5rem 0 1rem;
     }
 
     & .navItems {
-        min-width: 140px;
+        min-width: 320px;
         display: flex;
         justify-content: space-between;
 
@@ -20,12 +25,37 @@
             text-decoration: none;
             color: color(heavy-grey);
             transition: 0.5s;
+            line-height: 30px;
 
             &:hover {
                 color: color(yellow);
             }
         }
+
+        .search {
+            height: 30px;
+            display: flex;
+
+            .searchInput {
+                width: 100px;
+                padding: 0 0.6rem;
+                height: 100%;
+                outline: none;
+                border-radius: 4px;
+                border: 1px solid color(lighter-grey);
+            }
+
+            .btn {
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid color(lighter-grey);
+            }
+        }
     }
+}
+
+.sideDrawer {
+    display: none;
 }
 
 .pagination {
@@ -49,5 +79,80 @@
                 background-color: color(yellow);
             }
         }
+    }
+}
+
+@include response(m) {
+    h2 {
+        font-size: 0.9em;
+        margin: 0;
+    }
+}
+
+@include response(s) {
+    .navbar {
+        .menu {
+            display: block;
+        }
+        h2 {
+            display: none;
+        }
+        .navItems {
+            display: none;
+        }
+    }
+
+    .sideDrawer {
+        display: block;
+        height: 100%;
+        min-width: 80%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+        background-color: color(white);
+        padding: 32px 16px;
+        box-sizing: border-box;
+        z-index: 100;
+        transition: 0.4s 0.1s;
+
+        .menuClose {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2em;
+        }
+
+        .navItems {
+            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            height: 130px;
+            justify-content: space-between;
+
+            & a {
+                text-decoration: none;
+                color: color(heavy-grey);
+                transition: 0.5s;
+                line-height: 30px;
+
+                &:hover {
+                    color: color(yellow);
+                }
+            }
+        }
+    }
+    .sideDrawer.active {
+        transform: translateX(0);
+    }
+
+    .backdrop {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+        transition: 0.4s;
+        background-color: color(transparent-grey);
     }
 }

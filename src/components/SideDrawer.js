@@ -2,9 +2,14 @@ import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { icon } from '../utils/icon'
-import '../sass/layout.scss'
 
-const Navbar = props => {
+const SideDrawer = props => {
+    const classes = ['sideDrawer']
+
+    if (props.show) {
+        classes.push('active')
+    }
+
     const searchInput = useRef(null)
 
     const getSearchInputValue = e => {
@@ -14,9 +19,9 @@ const Navbar = props => {
     }
 
     return (
-        <header className="navbar">
-            <div className="menu" onClick={props.open}>
-                {icon.menu()}
+        <nav className={classes.join(' ')}>
+            <div className="menuClose" onClick={props.close}>
+                {icon.menuClose()}
             </div>
             <h2>VIDEO LIST</h2>
             <nav className="navItems">
@@ -29,8 +34,8 @@ const Navbar = props => {
                     </button>
                 </form>
             </nav>
-        </header>
+        </nav>
     )
 }
 
-export default Navbar
+export default SideDrawer

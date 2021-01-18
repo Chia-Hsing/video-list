@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import VideoPlayer from '../components/VideoPlayer'
-import * as actions from '../store/actions/index'
 import { icon } from '../utils/icon'
 import '../sass/video.scss'
 
@@ -14,8 +13,6 @@ class Video extends Component {
 
     async componentDidMount() {
         const id = this.props.match.params.id
-
-        await this.props.onGetRecommendation(process.env.REACT_APP_GOOGLE_API_KEY, id)
 
         const currentVideo = this.props.listData.find(item => {
             return item.id === id
@@ -58,10 +55,4 @@ const mapPropsToState = state => {
     }
 }
 
-const mapPropsToDispatch = dispatch => {
-    return {
-        onGetRecommendation: (apiKey, id) => dispatch(actions.getRecommendation(apiKey, id)),
-    }
-}
-
-export default connect(mapPropsToState, mapPropsToDispatch)(Video)
+export default connect(mapPropsToState)(Video)

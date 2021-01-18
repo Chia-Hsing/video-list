@@ -14,11 +14,13 @@ const VideoPlayer = props => {
                     type: 'application/x-mpegURL',
                 },
             ],
+            fluid: true,
+            aspectRatio: '16:9',
             autoplay: false,
             controls: true,
             muted: false,
-            width: '960px',
-            height: '540px',
+            // width: '960px',
+            // height: '540px',
         })
 
         return () => {

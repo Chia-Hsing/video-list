@@ -81,36 +81,18 @@ export const getPopularListPage2 = (apiKey, token) => async dispatch => {
     }
 }
 
-export const getRecommendation = (apiKey, id) => async dispatch => {
-    try {
-        const { data: list } = await apis.getRecommendation(apiKey, id)
+export const getSearchResults = (condition, listData) => dispatch => {
+    const regEx = new RegExp(condition, 'i')
 
-        console.log(list)
+    const result = listData.filter(item => item.title.match(regEx))
 
-        let recommendationData = []
-
-        list.items.forEach(item => {
-            const {
-                snippet: {
-                    title,
-                    thumbnails: {
-                        medium: { url },
-                    },
-                },
-                id,
-            } = item
-
-            recommendationData.push({ title, url, id })
-        })
-
-        dispatch({
-            type: actionTypes.GET_RECOMMENDATION_LIST_SUCCESS,
-            recommendationData,
-        })
-    } catch (error) {
-        dispatch({
-            type: actionTypes.GET_LIST_FAILED,
-            error,
-        })
+    if (result.length > 0) {
+        dispatch({ type: actionTypes.GET_SEARCH_RESULTS_SUCCESS, result })
+    } else {
+        dispatch({ type: actionTypes.GET_SEARCH_RESULTS_FAILED })
     }
+}
+
+export const initSearch = () => dispatch => {
+    dispatch({ type: actionTypes.SEARCH_RESULTS_INIT })
 }

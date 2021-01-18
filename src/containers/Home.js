@@ -62,38 +62,82 @@ class Home extends Component {
 
     render() {
         const itemsShown = 12
-        const allPagesContent = this.props.listData
         const page = this.state.currentPage
-
         const start = (page - 1) * itemsShown
         const end = start + itemsShown
-        let pageContent = allPagesContent.slice(start, end)
 
-        let popularList = pageContent.map(item => {
-            return (
-                <PopularList
-                    key={item.title}
-                    img={item.url}
-                    duration={item.duration}
-                    title={item.title}
-                    des={item.description}
-                    id={item.id}
-                    addLike={id => this.addLikeHandler(id)}
-                    removeLike={id => this.removeLikeHandler(id)}
-                />
-            )
-        })
+        let popularList = null
 
-        return (
-            <>
-                <section className="wrap">{popularList}</section>
+        if (this.props.searchResults.length > 0) {
+            let searchResultsPageContent = this.props.searchResults.slice(start, end)
+
+            popularList = searchResultsPageContent.map(item => {
+                return (
+                    <PopularList
+                        key={item.title}
+                        img={item.url}
+                        duration={item.duration}
+                        title={item.title}
+                        des={item.description}
+                        id={item.id}
+                        addLike={id => this.addLikeHandler(id)}
+                        removeLike={id => this.removeLikeHandler(id)}
+                    />
+                )
+            })
+        } else {
+            let pageContent = this.props.listData.slice(start, end)
+
+            popularList = pageContent.map(item => {
+                return (
+                    <PopularList
+                        key={item.title}
+                        img={item.url}
+                        duration={item.duration}
+                        title={item.title}
+                        des={item.description}
+                        id={item.id}
+                        addLike={id => this.addLikeHandler(id)}
+                        removeLike={id => this.removeLikeHandler(id)}
+                    />
+                )
+            })
+        }
+
+        let pagination = null
+
+        if (this.props.searchResults.length > 0) {
+            const totalPages = Math.ceil(this.props.searchResults.length / 12)
+
+            pagination = (
                 <Pagination
-                    totalPages={this.props.totalPages}
+                    totalPages={totalPages}
                     currentPage={this.state.currentPage}
                     nextPageSwitch={this.nextPageSwitchHandler}
                     prevPageSwitch={this.prevPageSwitchHandler}
                     currentPageSwitch={e => this.currentPageSwitchHandler(e)}
                 />
+            )
+        } else {
+            const totalPages = Math.ceil(this.props.totalResults / 12)
+            pagination = (
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={this.state.currentPage}
+                    nextPageSwitch={this.nextPageSwitchHandler}
+                    prevPageSwitch={this.prevPageSwitchHandler}
+                    currentPageSwitch={e => this.currentPageSwitchHandler(e)}
+                />
+            )
+        }
+
+        return (
+            <>
+                <section className="wrap">
+                    {this.props.resultExist ? null : alert('oops ... Can not find results that match your condition!!')}
+                    {popularList}
+                </section>
+                {pagination}
             </>
         )
     }
@@ -102,8 +146,10 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         nextPageToken: state.nextPageToken,
-        totalPages: state.totalPages,
+        totalResults: state.totalResults,
         listData: state.listData,
+        searchResults: state.searchResults,
+        resultExist: state.resultExist,
     }
 }
 

@@ -3,20 +3,18 @@ import { updateObj } from '../../utils/utilities'
 
 const initialState = {
     totalResults: 0,
-    totalPages: 0,
     nextPageToken: null,
     listData: [],
-    recommendationData: [],
+    searchResults: [],
+    resultExist: true,
     error: null,
 }
 
 const getPopularListSuccess = (state, action) => {
     const totalResults = action.totalResults >= 100 ? 100 : action.totalResults
-    const totalPages = Math.ceil(totalResults / 12)
 
     return updateObj(state, {
         totalResults: totalResults,
-        totalPages: totalPages,
         nextPageToken: action.nextPageToken,
         listData: action.listData,
         error: null,
@@ -37,11 +35,16 @@ const getPopularListFailed = (state, action) => {
     })
 }
 
-const getRecommendationSuccess = (state, action) => {
-    return updateObj(state, {
-        recommendationData: action.recommendationData,
-        error: null,
-    })
+const initSearch = (state, action) => {
+    return updateObj(state, { resultExist: true })
+}
+
+const getSearchResultsSuccess = (state, action) => {
+    return updateObj(state, { searchResults: action.result, resultExist: true })
+}
+
+const getSearchResultsFailed = (state, action) => {
+    return updateObj(state, { resultExist: false })
 }
 
 const reducer = (state = initialState, action) => {
@@ -52,8 +55,12 @@ const reducer = (state = initialState, action) => {
             return getPopularListPage2Success(state, action)
         case actionTypes.GET_LIST_FAILED:
             return getPopularListFailed(state, action)
-        case actionTypes.GET_RECOMMENDATION_LIST_SUCCESS:
-            return getRecommendationSuccess(state, action)
+        case actionTypes.SEARCH_RESULTS_INIT:
+            return initSearch(state, action)
+        case actionTypes.GET_SEARCH_RESULTS_SUCCESS:
+            return getSearchResultsSuccess(state, action)
+        case actionTypes.GET_SEARCH_RESULTS_FAILED:
+            return getSearchResultsFailed(state, action)
         default:
             return state
     }

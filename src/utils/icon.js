@@ -29,4 +29,36 @@ export const icon = {
             </svg>
         )
     },
+
+    search() {
+        return (
+            <svg focusable="false" width="1em" height="1em" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.35-4.35"></path>
+                </g>
+            </svg>
+        )
+    },
+
+    menuClose() {
+        return (
+            <svg focusable="false" width="1em" height="1em" viewBox="0 0 24 24">
+                <path
+                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"
+                    fill="currentColor"
+                ></path>
+            </svg>
+        )
+    },
+    menu() {
+        return (
+            <svg focusable="false" width="1em" height="1em" viewBox="0 0 1024 1024">
+                <path
+                    d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"
+                    fill="currentColor"
+                ></path>
+            </svg>
+        )
+    },
 }
