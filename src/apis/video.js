@@ -1,7 +1,7 @@
-import apiHelper from '../utils/apiHelper'
+import axios from 'axios'
 
 export const getPopularList = apiKey => {
-    return apiHelper.get('https://youtube.googleapis.com/youtube/v3/videos', {
+    return axios.get('https://youtube.googleapis.com/youtube/v3/videos', {
         params: {
             part: 'snippet,contentDetails',
             chart: 'mostPopular',
@@ -14,7 +14,7 @@ export const getPopularList = apiKey => {
 }
 
 export const getPopularListPage2 = (apiKey, token) => {
-    return apiHelper.get('https://youtube.googleapis.com/youtube/v3/videos', {
+    return axios.get('https://youtube.googleapis.com/youtube/v3/videos', {
         params: {
             part: 'snippet,contentDetails',
             chart: 'mostPopular',
@@ -28,7 +28,7 @@ export const getPopularListPage2 = (apiKey, token) => {
 }
 
 export const getRecommendation = (apiKey, id) => {
-    return apiHelper.get('https://www.googleapis.com/youtube/v3/search', {
+    return axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
             part: 'snippet',
             key: apiKey,
