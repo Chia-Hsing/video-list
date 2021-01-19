@@ -51,7 +51,7 @@ $ touch .env
 ```
 REACT_APP_GOOGLE_API_KEY = 
 ```
-**5. Then you can view the app locally on http://localhost:3000/Good-Day-Weather-App-react**
+**5. Then you can view the app locally on http://localhost:3000**
 ```
 $ npm start
 ```
@@ -60,6 +60,5 @@ $ npm start
 ![image](https://github.com/Chia-Hsing/video-list/blob/master/img1.png)
 
 ![image](https://github.com/Chia-Hsing/video-list/blob/master/img2.png)
-
 
 ![image](https://github.com/Chia-Hsing/video-list/blob/master/img3.png)
