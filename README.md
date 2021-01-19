@@ -35,9 +35,9 @@ $ git clone https://github.com/Chia-Hsing/video-list.git
 ```
   
 ## Setup
-**1. Access the Video-List file.**
+**1. Access the video-list file.**
 ```
-$ cd Video_List
+$ cd video-list
 ```
 **2. Install packages.**
 ```
@@ -50,7 +50,6 @@ $ touch .env
 **4. Store your API Key in .env file and save.**
 ```
 REACT_APP_GOOGLE_API_KEY = 
-
 ```
 **5. Then you can view the app locally on http://localhost:3000/Good-Day-Weather-App-react**
 ```
@@ -64,6 +63,3 @@ $ npm start
 
 
 ![image](https://github.com/Chia-Hsing/video-list/blob/master/img3.png)
-
-
-# Current progress
