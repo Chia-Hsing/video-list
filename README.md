@@ -22,8 +22,8 @@ A video preview app built with __React__, which lists the most recently popular 
   1. Sign in your Google account.
   2. Create or select a project on [Google Cloud Platform](https://console.developers.google.com/)
   3. From the menu, click the __APIs and services__ .
-  4. On the APIs and services page, click __ENABLE APIs and services.
-  5. Search out the API you are going to use. (which are Geocoding API and Geolocation API)
+  4. On the APIs and services page, click __ENABLE APIs and services__.
+  5. Search out the API you are going to use.
   6. From the menu, click __Credentials__.
   7. Click __Create credentials__.
   8. Click __API key__, then the API key would be showed on the dialog box.
